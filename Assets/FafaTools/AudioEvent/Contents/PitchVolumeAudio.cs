@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="FafaTools/Audio/PitchVolumeAudio")]
-public class PitchVolumeAudio : AudioEvent {
-	public RangedFloat volume;
+namespace FafaTools.Audio
+{
+	[CreateAssetMenu(menuName="FafaTools/Audio/PitchVolumeAudio")]
+	public class PitchVolumeAudio : AudioEvent
+	{
+		public RangedFloat m_Volume;
 
-	[MinMaxRange(0,2)]
-	public RangedFloat pitch;
-	public override void Play(AudioSource source){
-		source.clip = clips[Random.Range(0,clips.Length)];
-		source.volume = Random.Range(volume.minValue, volume.maxValue);
-		source.pitch = Random.Range(pitch.minValue, pitch.maxValue);
-		source.loop=loop;
-		source.Play();
+		[MinMaxRange(0,2)]
+		public RangedFloat m_Pitch;
+
+		public override void Play(AudioSource source)
+		{
+			source.clip = m_Clips[Random.Range(0,m_Clips.Length)];
+			source.volume = Random.Range(m_Volume.minValue, m_Volume.maxValue);
+			source.pitch = Random.Range(m_Pitch.minValue, m_Pitch.maxValue);
+			source.loop= m_IsLooping;
+			source.Play();
+		}
 	}
 }

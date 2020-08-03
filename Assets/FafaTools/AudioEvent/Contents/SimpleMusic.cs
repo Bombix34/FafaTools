@@ -1,43 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FafaTools.Utils.Array;
 
-[CreateAssetMenu(menuName="FafaTools/Audio/SimpleMusic")]
-public class SimpleMusic : AudioEvent {
-	private bool isPlaying;
-	private int index;
+namespace FafaTools.Audio
+{
+	[CreateAssetMenu(menuName = "FafaTools/Audio/SimpleMusic")]
+	public class SimpleMusic : AudioEvent
+	{
+		private bool m_IsPlaying;
+		private int m_Index;
 
-	public override void Play(AudioSource source){
-		source.clip = clips[Random.Range(0,clips.Length)];
-		source.loop=loop;
-		source.Play();
-	}
-	public void PlayNext(AudioSource source){
-		index = index < clips.Length-1?index+1:0;
-		source.clip = clips[index];
-		source.loop=false;
-		source.Play();
-	}
+		public override void Play(AudioSource source)
+		{
+			source.clip = m_Clips[Random.Range(0, m_Clips.Length)];
+			source.loop = m_IsLooping;
+			source.Play();
+		}
 
-	public IEnumerator StartMusic(AudioSource source){
-		this.isPlaying = true;
-		index = -1;
-		ArrayExtension.Shuffle(this.clips);//On randomize les music
-        while (true) {
-			if(this.isPlaying && !source.isPlaying)
-            	PlayNext(source);
+		public void PlayNext(AudioSource source)
+		{
+			m_Index = m_Index < m_Clips.Length - 1 ? m_Index + 1 : 0;
+			source.clip = m_Clips[m_Index];
+			source.loop = false;
+			source.Play();
+		}
 
-			if(!this.isPlaying && source.isPlaying)//On arrete la music si 
-				source.Stop();
+		public IEnumerator StartMusic(AudioSource source)
+		{
+			m_IsPlaying = true;
+			m_Index = -1;
+			ArrayExtension.Shuffle(this.m_Clips);//On randomize les music
+			while (true)
+			{
+				if (m_IsPlaying && !source.isPlaying)
+					PlayNext(source);
 
-            yield return null;
+				if (m_IsPlaying && source.isPlaying)//On arrete la music si 
+					source.Stop();
+
+				yield return null;
+			}
+		}
+
+        #region GET/SET
+
+        public bool IsPlaying
+        {
+			set
+            {
+				m_IsPlaying = value;
+            }
+            get
+			{
+				return m_IsPlaying;
+			}
         }
-	}
 
-	public void StopMusic(){
-		this.isPlaying = false;
-	}
-	public void RestartMusic(){
-		this.isPlaying = true;
-	}
+        #endregion
+    }
 }
