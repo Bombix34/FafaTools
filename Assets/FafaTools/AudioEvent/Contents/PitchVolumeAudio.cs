@@ -14,11 +14,11 @@ namespace FafaTools.Audio
 
 		public override void Play(AudioSource source)
 		{
-			source.clip = m_Clips[Random.Range(0,m_Clips.Length)];
 			source.volume = Random.Range(m_Volume.minValue, m_Volume.maxValue);
 			source.pitch = Random.Range(m_Pitch.minValue, m_Pitch.maxValue);
 			source.loop= m_IsLooping;
-			source.Play();
+			source.outputAudioMixerGroup = m_AudioMixerGroup;
+			source.PlayOneShot(m_Clips[Random.Range(0, m_Clips.Length)]);
 		}
 	}
 }

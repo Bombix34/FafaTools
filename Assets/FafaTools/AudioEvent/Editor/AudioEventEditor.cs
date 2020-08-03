@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using FafaTools.Audio;
 
 [CustomEditor(typeof(AudioEvent), true)]
 public class AudioEventEditor : Editor

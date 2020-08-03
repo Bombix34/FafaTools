@@ -11,6 +11,7 @@ namespace FafaTools.Audio
 		{
 			source.clip = m_Clips[Random.Range(0, m_Clips.Length)];
 			source.loop = m_IsLooping;
+			source.outputAudioMixerGroup = m_AudioMixerGroup;
 			source.Play();
 		}
 	}
