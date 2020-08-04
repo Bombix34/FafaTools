@@ -10,11 +10,15 @@ namespace FafaTools.Audio
 	{
 		private bool m_IsPlaying;
 		private int m_Index;
+        [Range(0f,1f)]
+        public float m_Volume;
 
-		public override void Play(AudioSource source)
-		{
-			source.clip = m_Clips[Random.Range(0, m_Clips.Length)];
+		public override void Play(AudioSource source = null)
+        {
+            AudioSource sourceSet = (source != null ? source : SoundManager.Instance.GetAudioSource(audioSourceType));
+            source.clip = m_Clips[Random.Range(0, m_Clips.Length)];
 			source.loop = m_IsLooping;
+            source.volume = m_Volume;
 			source.outputAudioMixerGroup = m_AudioMixerGroup;
 			source.Play();
 		}

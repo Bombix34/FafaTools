@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SingletonScriptableObject<T> : ScriptableObject where T : ScriptableObject
 {
     private static T m_Instance;
+
 
     /// <summary>
     /// Access singleton instance through this propriety.
@@ -15,7 +17,7 @@ public class SingletonScriptableObject<T> : ScriptableObject where T : Scriptabl
         {
             if(m_Instance==null)
             {
-                Debug.LogError("Your singleton scriptable object is null !");
+                m_Instance = Resources.FindObjectsOfTypeAll<T>().FirstOrDefault();
             }
             return m_Instance;
         }

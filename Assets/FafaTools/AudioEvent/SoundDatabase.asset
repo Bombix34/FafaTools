@@ -10,16 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 208e5a3534dfb4bf79d2fac19c853cc9, type: 3}
-  m_Name: DataBase
+  m_Name: SoundDatabase
   m_EditorClassIdentifier: 
   m_Datas:
-  - m_EnumFieldName: TestAudio1
+  - m_EnumFieldName: newsound
     m_AudioEvent: {fileID: 0}
-  - m_EnumFieldName: SFX2
-    m_AudioEvent: {fileID: 0}
-  - m_EnumFieldName: SFX3
-    m_AudioEvent: {fileID: 0}
-  - m_EnumFieldName: SFX4
-    m_AudioEvent: {fileID: 0}
-  - m_EnumFieldName: SFX5
+  - m_EnumFieldName: newsound
     m_AudioEvent: {fileID: 0}
